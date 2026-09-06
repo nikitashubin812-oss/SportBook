@@ -1,0 +1,34 @@
+[1] https://infourok.ru/prezentaciya-k-otkrytomu-uroku-analiz-predmetnoj-oblasti-po-mezhdisciplinarnomu-kursu-tehnologii-razrabotki-programmnogo-obespec-7595133.html
+[2] https://sh-petrovskaya-r56.gosweb.gosuslugi.ru/svedeniya-ob-obrazovatelnoy-organizatsii/materialno-tehnicheskoe-obespechenie-dostupnaya-sreda/sportivnaya-ploschadka/
+[3] https://ru.wikipedia.org/wiki/Бронирование_(экономика)
+[4] https://bigenc.ru/c/arendodatel-d9342e
+[5] https://gosuslugisovet.ru/terms/view/arendator
+[6] https://ru.ruwiki.ru/wiki/Администратор_сайта
+[7] https://ru.wikipedia.org/wiki/Рейтинг
+[8] https://vedmaster.ru/glossary/predoplata
+[9] https://www.kommersant.ru/doc/7657087
+[10] https://vk.com/clicksportru
+[11]https://sportgate.ru
+[12]https://thecode.media/baza-po-vyorstke-osnovy-html/
+[13]https://timeweb.com/ru/community/articles/chto-takoe-css
+[14]https://digitalocean.ru/n/chto-takoe-javascript
+[15] https://fastapi.tiangolo.com/ru/
+[16] https://practicum.yandex.ru/blog/chto-takoe-rest-api-i-kak-rabotaet/
+[17] https://cloud.ru/blog/postgresql-chto-eto-za-subd
+[18]https://practicum.yandex.ru/blog/chto-takoe-format-json/
+[19] https://www.securitylab.ru/blog/personal/paragraph/354493.php
+[12]4 рис. https://intuit.ru/studies/courses/1007/229/lecture/5954?page=1
+[13] рис 5 https://ciu.nstu.ru/kaf/persons/1914/page47048/diagramm_deyatelnosti
+НИР8
+[1]https://ru.ruwiki.ru/wiki/Windows_10
+[2] https://ru.ruwiki.ru/wiki/Python
+[3] https://ru.ruwiki.ru/wiki/JavaScript
+[4] https://practicum.yandex.ru/blog/vsyo-o-visual-studio-code/
+[5] https://pypi.org/project/python-jose/
+[6] https://pythonlib.ru/library-theme81
+[7] https://habr.com/ru/companies/amvera/articles/851642/
+[8] https://habr.com/ru/articles/472674/
+[9] https://habr.com/ru/articles/913318/
+[10] https://docs.ensi.tech/analyst-guides/tools/diagrams/uml/activity-diagram
+[11] https://practicum.yandex.ru/blog/sequence-diagram/
+[12] https://habr.com/ru/articles/756552/

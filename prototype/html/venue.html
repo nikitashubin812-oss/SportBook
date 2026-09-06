@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Площадка - SportBook</title>
+    <link rel="stylesheet" href="/static/css/styles.css?v=4">
+    <link rel="stylesheet" href="/static/css/venue.css?v=6">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="/">SportBook</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="/" class="nav-link">Главная</a>
+                    <a href="/catalog" class="nav-link">Площадки</a>
+                    <a href="/about" class="nav-link">О нас</a>
+                    <a href="/login" class="btn-login" id="nav-auth-btn">Войти</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="container">
+            <div class="venue-layout">
+
+                <!-- Левая колонка: основной контент -->
+                <div>
+                    <nav class="breadcrumbs" aria-label="Навигация">
+                        <a href="/">Главная</a>
+                        <span class="breadcrumbs-sep">›</span>
+                        <a href="/catalog">Площадки</a>
+                        <span class="breadcrumbs-sep">›</span>
+                        <span class="breadcrumbs-current" id="breadcrumb-venue-name">Площадка</span>
+                    </nav>
+                    <div class="venue-main-card">
+                        <div class="venue-photo" id="venue-photo"></div>
+                        <div class="venue-content-pad">
+                            <div class="venue-header-row">
+                                <div>
+                                    <h1 class="venue-title" id="venue-name">Загрузка...</h1>
+                                    <div class="venue-rating-row">
+                                        <div class="venue-rating" id="venue-rating-block">
+                                            <span id="venue-stars" style="color:#ccc">★★★★★</span>
+                                            <span id="venue-rating">Нет отзывов</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="venue-header-actions">
+                                    <button type="button" id="venue-favorite-btn" class="venue-favorite-header-btn" style="display:none" aria-pressed="false">В избранное</button>
+                                    <div class="venue-price-block">
+                                        <div class="venue-price-value" id="venue-price">— ₽</div>
+                                        <div class="venue-price-label">за час</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="venue-details-grid">
+                                <div>
+                                    <div class="venue-detail-label">Город</div>
+                                    <div class="venue-detail-value" id="venue-city">—</div>
+                                </div>
+                                <div>
+                                    <div class="venue-detail-label">Адрес</div>
+                                    <div class="venue-detail-value" id="venue-address">—</div>
+                                </div>
+                                <div>
+                                    <div class="venue-detail-label">Виды спорта</div>
+                                    <div class="venue-detail-value" id="venue-sports">—</div>
+                                </div>
+                                <div>
+                                    <div class="venue-detail-label">Вместимость</div>
+                                    <div class="venue-detail-value" id="venue-capacity">—</div>
+                                </div>
+                                <div>
+                                    <div class="venue-detail-label">Площадь</div>
+                                    <div class="venue-detail-value" id="venue-area">—</div>
+                                </div>
+                            </div>
+
+                            <h3 class="venue-section-title">Описание</h3>
+                            <p class="venue-description" id="venue-description">—</p>
+
+                            <h3 class="venue-section-title-spaced">Удобства</h3>
+                            <div class="venue-amenities" id="venue-amenities"></div>
+                        </div>
+                    </div>
+
+                    <!-- Отзывы -->
+                    <div class="venue-reviews">
+                        <h2 class="venue-reviews-title">Отзывы</h2>
+
+                        <!-- Форма написания отзыва (только для арендаторов с подтверждённой бронью) -->
+                        <div id="review-form-wrap" style="display:none;">
+                            <div class="review-form-card">
+                                <h4 class="review-form-title">Ваш отзыв</h4>
+                                <div class="review-stars-input" id="review-stars-input">
+                                    <span class="star-btn" data-value="1">★</span>
+                                    <span class="star-btn" data-value="2">★</span>
+                                    <span class="star-btn" data-value="3">★</span>
+                                    <span class="star-btn" data-value="4">★</span>
+                                    <span class="star-btn" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="review-rating" value="0">
+                                <textarea id="review-comment" class="search-input review-textarea" rows="3" placeholder="Расскажите о площадке..."></textarea>
+                                <div id="review-booking-select-wrap">
+                                    <select id="review-booking-select" class="search-input"></select>
+                                </div>
+                                <p id="review-form-status" class="review-form-status"></p>
+                                <button class="btn-primary review-submit-btn" id="review-submit-btn" onclick="submitReview()">Опубликовать отзыв</button>
+                            </div>
+                        </div>
+
+                        <div id="venue-reviews-list">
+                            <p class="text-gray">Загрузка отзывов...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: бронирование -->
+                <div>
+                    <div class="booking-sidebar">
+                        <h3 class="booking-sidebar-title">Бронирование</h3>
+
+                        <div class="booking-participants">
+                            <label>Количество человек</label>
+                            <input type="number" class="search-input" id="participants-count" value="1" min="1">
+                        </div>
+
+                        <button class="btn-primary booking-btn" id="book-btn" onclick="handleBooking()">Выбрать время и забронировать</button>
+
+                        <p class="booking-hint">Выберите удобное время в календаре. После бронирования вы получите QR-код для оплаты.</p>
+
+                        <div class="landlord-section">
+                            <h4 class="landlord-section-title">Арендодатель</h4>
+                            <div class="landlord-card">
+                                <div class="landlord-avatar" id="landlord-avatar">?</div>
+                                <div>
+                                    <div class="landlord-name" id="landlord-name">—</div>
+                                    <div class="landlord-since" id="landlord-email">—</div>
+                                    <div class="landlord-since" id="landlord-phone"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно бронирования -->
+    <div id="booking-modal" class="booking-modal-overlay" style="display:none;">
+        <div class="booking-modal">
+
+            <!-- Шапка -->
+            <div class="booking-modal-header">
+                <div class="booking-modal-venue-info">
+                    <div class="booking-modal-venue-avatar" id="modal-venue-avatar">С</div>
+                    <div>
+                        <div class="booking-modal-venue-name" id="modal-venue-name">Площадка</div>
+                        <div class="booking-modal-venue-sub">Аренда</div>
+                    </div>
+                </div>
+                <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
+            </div>
+
+            <!-- Календарь -->
+            <div class="booking-calendar">
+                <!-- Навигация по неделям -->
+                <div class="booking-calendar-nav">
+                    <button class="cal-nav-btn" id="cal-prev" onclick="changeWeek(-1)">&#8249;</button>
+                    <div class="cal-week-days" id="cal-week-days">
+                        <!-- Дни недели заполняются JS -->
+                    </div>
+                    <button class="cal-nav-btn" id="cal-next" onclick="changeWeek(1)">&#8250;</button>
+                </div>
+
+                <!-- Сетка слотов -->
+                <div class="booking-calendar-body">
+                    <div class="cal-time-col" id="cal-time-left">
+                        <!-- Часы слева -->
+                    </div>
+                    <div class="cal-slots-grid" id="cal-slots-grid">
+                        <!-- Слоты заполняются JS -->
+                    </div>
+                    <div class="cal-time-col" id="cal-time-right">
+                        <!-- Часы справа -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Подвал модального окна -->
+            <div class="booking-modal-footer">
+                <div class="booking-modal-summary" id="booking-summary">
+                    <span class="booking-summary-price" id="modal-total-price">0 ₽</span>
+                    <span class="booking-summary-time" id="modal-selected-time">Выберите время</span>
+                </div>
+                <div class="booking-modal-actions">
+                    <button class="btn-secondary" onclick="clearSlotSelection()">Очистить</button>
+                    <button class="btn-primary booking-modal-confirm" id="modal-confirm-btn" onclick="confirmBooking()" disabled>Далее</button>
+                </div>
+            </div>
+
+            <!-- Экран успеха: QR-код + загрузка чека -->
+            <div id="booking-success-view" class="booking-success-view" style="display:none;">
+
+                <!-- Шапка экрана успеха -->
+                <div class="booking-modal-header bsv-header">
+                    <div class="bsv-title-block">
+                        <div class="bsv-badge">Бронирование создано</div>
+                        <p class="bsv-details" id="bsv-details">—</p>
+                    </div>
+                    <button class="booking-modal-close" onclick="closeBookingSuccess()">&times;</button>
+                </div>
+
+                <!-- Тело: QR + чек -->
+                <div class="bsv-body">
+
+                    <!-- Левая часть: QR -->
+                    <div class="bsv-qr-col">
+                        <p class="bsv-step-label">Шаг 1. Отсканируйте QR и оплатите</p>
+                        <div class="bsv-qr-frame" id="bsv-qr-frame">
+                            <img id="bsv-qr-img" class="bsv-qr-img" src="" alt="QR-код для оплаты" style="display:none;">
+                            <div id="bsv-qr-missing" class="bsv-qr-missing" style="display:none;">
+                                QR-код не загружен арендодателем
+                            </div>
+                        </div>
+                        <div class="bsv-prepay-block">
+                            <span class="bsv-prepay-label">Сумма предоплаты (20%)</span>
+                            <span class="bsv-prepay-amount" id="bsv-prepay-amount">— ₽</span>
+                        </div>
+                        <p class="bsv-qr-hint">Переведите указанную сумму по QR-коду</p>
+                    </div>
+
+                    <!-- Правая часть: загрузка чека -->
+                    <div class="bsv-receipt-col">
+                        <p class="bsv-step-label">Шаг 2. Загрузите чек об оплате</p>
+                        <div class="bsv-receipt-drop" id="bsv-receipt-drop" onclick="document.getElementById('bsv-receipt-file').click()">
+                            <div id="bsv-receipt-placeholder" class="bsv-receipt-placeholder">
+                                <div class="bsv-receipt-icon">&#128196;</div>
+                                <div>Нажмите или перетащите файл</div>
+                                <small>JPG, PNG, PDF до 5 МБ</small>
+                            </div>
+                            <img id="bsv-receipt-preview" class="bsv-receipt-preview" src="" alt="" style="display:none;">
+                        </div>
+                        <input type="file" id="bsv-receipt-file" accept="image/jpeg,image/png,image/webp,application/pdf" style="display:none;">
+                        <p id="bsv-receipt-status" class="bsv-receipt-status"></p>
+                        <p class="bsv-receipt-hint">После загрузки арендодатель проверит чек и подтвердит бронирование</p>
+                        <button class="btn-primary bsv-send-btn" id="bsv-send-btn" onclick="submitReceipt()" disabled>
+                            Отправить чек
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Подвал -->
+                <div class="bsv-footer">
+                    <button class="btn-secondary" onclick="closeBookingSuccess()">Закрыть</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SportBook</h3>
+                    <p>Современная платформа для бронирования спортивных площадок</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="/">Главная</a>
+                    <a href="/catalog">Площадки</a>
+                    <a href="/about">О нас</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SportBook. Выпускная квалификационная работа</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/api.js?v=18"></script>
+    <script src="/static/js/favorites.js?v=2"></script>
+    <script src="/static/js/venue.js?v=20"></script>
+</body>
+</html>

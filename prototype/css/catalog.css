@@ -1,0 +1,240 @@
+/* ===== CATALOG PAGE ===== */
+
+/* Умный поиск */
+.catalog-search-bar {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.catalog-search-input {
+    width: 100%;
+    padding: 14px 48px 14px 20px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    border: 2px solid var(--border-color, #e0e0e0);
+    background: var(--white);
+    color: var(--dark);
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.catalog-search-input:focus {
+    border-color: var(--dark);
+}
+
+.catalog-search-input::placeholder {
+    color: #aaa;
+}
+
+.catalog-search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #aaa;
+    pointer-events: none;
+}
+
+/* Основной layout: сетка сайдбар + контент */
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-top: 24px;
+}
+
+/* Боковая панель — прилипает к верху при прокрутке (стандарт: Ozon, Avito) */
+.catalog-sidebar {
+    background: var(--white);
+    border: 1px solid #e0e0e0;
+    padding: 24px;
+    /* прилипает под хедером (64px) + небольшой отступ */
+    position: sticky;
+    top: 80px;
+    /* обязательно для sticky внутри grid */
+    align-self: start;
+}
+
+.sidebar-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+    padding-bottom: 0;
+}
+
+.sidebar-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-bottom: 12px;
+}
+
+.sidebar-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    background: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    cursor: pointer;
+    outline: none;
+    appearance: auto;
+}
+
+.sidebar-select:focus {
+    border-color: var(--dark);
+}
+
+/* Диапазон цен */
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-input {
+    width: 0;
+    flex: 1;
+    padding: 10px 10px;
+    border: 1px solid #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: var(--white);
+    outline: none;
+}
+
+.price-input:focus {
+    border-color: var(--dark);
+}
+
+.price-sep {
+    color: #aaa;
+    flex-shrink: 0;
+}
+
+/* Удобства */
+.amenity-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+}
+
+.amenity-filter-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--dark);
+    cursor: pointer;
+    user-select: none;
+}
+
+.amenity-filter-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--primary-color, #e02020);
+    flex-shrink: 0;
+}
+
+/* Кнопка сброса */
+.sidebar-reset-btn {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: 1px solid #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sidebar-reset-btn:hover {
+    border-color: var(--dark);
+    color: var(--dark);
+}
+
+/* Зона карточек */
+.catalog-content {
+    min-width: 0;
+    overflow-anchor: none;
+}
+
+.catalog-results-info {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 16px;
+    min-height: 20px;
+}
+
+/* Переопределяем grid для каталога (был в styles.css) */
+.catalog-content .venues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    overflow-anchor: none;
+}
+
+.catalog-content .venue-card {
+    position: relative;
+    cursor: default;
+}
+
+.catalog-content .venue-card .venue-card-inner {
+    cursor: pointer;
+}
+
+/* Избранное на карточке (только арендатор) */
+.venue-favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.venue-favorite-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.venue-favorite-btn.is-favorite {
+    background: var(--primary-color, #e02020);
+    border-color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .catalog-layout {
+        grid-template-columns: 1fr;
+        margin-top: 16px;
+    }
+
+    .catalog-sidebar {
+        position: static;
+    }
+}

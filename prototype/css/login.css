@@ -1,0 +1,129 @@
+/* ===== LOGIN PAGE ===== */
+
+.login-main {
+    padding: 4rem 0;
+    background: var(--light-gray);
+    /* чтобы под формой не "вылазил" белый фон body */
+    min-height: calc(100vh - 64px);
+}
+
+.login-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.login-card {
+    background: var(--white);
+    padding: 3rem;
+    border: var(--border);
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-error {
+    display: none;
+    padding: 1rem;
+    background: #fee2e2;
+    color: #991b1b;
+    margin-bottom: 1rem;
+    font-size: 14px;
+}
+
+.login-field {
+    margin-bottom: 1.25rem;
+}
+
+.login-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.login-field .search-input {
+    width: 100%;
+}
+
+.login-field .search-input.input-error {
+    border-color: #dc2626;
+    outline-color: #dc2626;
+}
+
+.login-field .field-error {
+    display: block;
+    visibility: hidden;
+    min-height: 1.4rem;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #dc2626 !important;
+}
+
+.login-field .field-error.visible {
+    visibility: visible;
+}
+
+.field-optional {
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.login-submit {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.login-divider {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-gray);
+}
+
+.login-divider p {
+    color: var(--gray);
+    margin-bottom: 1rem;
+}
+
+.login-alt-btn {
+    width: 100%;
+}
+
+.login-back-btn {
+    width: 100%;
+    background: var(--gray) !important;
+}
+
+.test-accounts {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: var(--light-gray);
+    font-size: 0.875rem;
+    color: var(--gray);
+}
+
+.test-accounts p {
+    margin: 0;
+}
+
+.test-accounts p + p {
+    margin-top: 0.25rem;
+}
+
+.test-accounts-title {
+    margin-bottom: 0.5rem;
+}
+
+/* Форма регистрации */
+.register-card {
+    display: none;
+    background: var(--white);
+    padding: 3rem;
+    border: var(--border);
+}
+
+.register-card.visible {
+    display: block;
+}

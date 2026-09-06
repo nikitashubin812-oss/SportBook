@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - SportBook</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/login.css?v=3">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="/">SportBook</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="/" class="nav-link">Главная</a>
+                    <a href="/catalog" class="nav-link">Площадки</a>
+                    <a href="/about" class="nav-link">О нас</a>
+                    <a href="/login" class="btn-login" id="nav-auth-btn" style="visibility:hidden;">Войти</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="login-main">
+        <div class="container">
+            <div class="login-wrapper">
+
+                <!-- Форма входа -->
+                <div id="login-card" class="login-card">
+                    <h2 class="login-title">Вход в систему</h2>
+
+                    <div id="error-message" class="login-error"></div>
+
+                    <form id="login-form">
+                        <div class="login-field">
+                            <label>Email</label>
+                            <input type="email" id="email" class="search-input" maxlength="100" required>
+                        </div>
+                        <div class="login-field">
+                            <label>Пароль</label>
+                            <input type="password" id="password" class="search-input" required>
+                        </div>
+                        <button type="submit" class="btn-primary login-submit">Войти</button>
+                    </form>
+
+                    <div class="login-divider">
+                        <p>Нет аккаунта?</p>
+                        <button onclick="switchToRegister()" class="btn-primary login-alt-btn">Регистрация</button>
+                    </div>
+                </div>
+
+                <!-- Форма регистрации -->
+                <div id="register-form-container" class="register-card">
+                    <h2 class="login-title">Регистрация</h2>
+
+                    <div id="register-error-message" class="login-error"></div>
+
+                    <form id="register-form" novalidate>
+                        <div class="login-field">
+                            <label>Email</label>
+                            <input type="text" id="reg-email" class="search-input" maxlength="100" autocomplete="email">
+                            <span class="field-error" id="err-email"></span>
+                        </div>
+                        <div class="login-field">
+                            <label>Полное имя</label>
+                            <input type="text" id="reg-fullname" class="search-input" autocomplete="name">
+                            <span class="field-error" id="err-fullname"></span>
+                        </div>
+                        <div class="login-field">
+                            <label>Телефон <span class="field-optional">(необязательно)</span></label>
+                            <input type="tel" id="reg-phone" class="search-input" placeholder="+7 999 123-45-67" autocomplete="tel">
+                            <span class="field-error" id="err-phone"></span>
+                        </div>
+                        <div class="login-field">
+                            <label>Пароль</label>
+                            <input type="password" id="reg-password" class="search-input" autocomplete="new-password">
+                            <span class="field-error" id="err-password"></span>
+                        </div>
+                        <div class="login-field">
+                            <label>Роль</label>
+                            <select id="reg-role" class="search-input">
+                                <option value="renter">Арендатор (ищу площадки)</option>
+                                <option value="landlord">Арендодатель (сдаю площадки)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary login-submit">Зарегистрироваться</button>
+                    </form>
+
+                    <div class="login-divider">
+                        <button onclick="switchToLogin()" class="btn-primary login-back-btn">Назад к входу</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/api.js?v=18"></script>
+    <script src="/static/js/login.js?v=3"></script>
+</body>
+</html>

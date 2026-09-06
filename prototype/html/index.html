@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportBook - Бронирование спортивных площадок</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="/">SportBook</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="/" class="nav-link active">Главная</a>
+                    <a href="/catalog" class="nav-link">Площадки</a>
+                    <a href="/about" class="nav-link">О нас</a>
+                    <a href="/login" class="btn-login">Войти</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">Бронирование спортивных площадок<br>без звонков и наценок</h2>
+                    <p class="hero-subtitle">Выбирайте, бронируйте, играйте — всё в несколько кликов</p>
+
+                    <div class="search-box">
+                        <select class="search-input">
+                            <option value="">Выберите город</option>
+                            <option value="Киров">Киров</option>
+                            <option value="Москва">Москва</option>
+                            <option value="Санкт-Петербург">Санкт-Петербург</option>
+                            <option value="Самара">Самара</option>
+                        </select>
+                        <select class="search-input">
+                            <option value="">Вид спорта</option>
+                            <option value="Футбол">Футбол</option>
+                            <option value="Баскетбол">Баскетбол</option>
+                            <option value="Волейбол">Волейбол</option>
+                            <option value="Теннис">Теннис</option>
+                            <option value="Хоккей">Хоккей</option>
+                            <option value="Плавание">Плавание</option>
+                            <option value="Бокс">Бокс</option>
+                        </select>
+                        <button class="btn-primary">Найти площадку</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Как это работает?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Найдите площадку</h3>
+                        <p>Выберите подходящий объект по виду спорта, расположению и времени</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Забронируйте слот</h3>
+                        <p>Выберите удобное время в календаре занятости площадки</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Оплатите предоплату</h3>
+                        <p>Получите QR-код и внесите предоплату, загрузите чек</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Получите подтверждение</h3>
+                        <p>Арендодатель подтвердит бронь в течение 24 часов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SportBook</h3>
+                    <p>Современная платформа для бронирования спортивных площадок</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="/">Главная</a>
+                    <a href="/catalog">Площадки</a>
+                    <a href="/about">О нас</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SportBook. Выпускная квалификационная работа</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/api.js?v=18"></script>
+    <script src="/static/js/index.js"></script>
+</body>
+</html>

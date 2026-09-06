@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - SportBook</title>
+    <link rel="stylesheet" href="/static/css/styles.css?v=4">
+    <link rel="stylesheet" href="/static/css/cabinet.css?v=17">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="/">SportBook</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="/" class="nav-link">Главная</a>
+                    <a href="/catalog" class="nav-link">Площадки</a>
+                    <a href="/about" class="nav-link">О нас</a>
+                    <button onclick="logout()" class="btn-login btn-logout">Выйти</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="container">
+
+            <!-- Профиль пользователя -->
+            <div class="user-profile-card">
+                <div class="user-profile-info">
+                    <div id="user-avatar" class="user-avatar"></div>
+                    <div>
+                        <h2 id="user-name" class="user-name">Загрузка...</h2>
+                        <p id="user-email" class="user-email"></p>
+                        <p id="user-role-display" class="user-role-label"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель: Арендатор -->
+            <div id="renter-panel" class="role-panel" style="display:none;">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab(event, 'my-bookings')">Мои бронирования</button>
+                    <button class="tab" onclick="switchTab(event, 'favorites')">Избранное</button>
+                    <button class="tab" onclick="switchTab(event, 'reviews')">Мои отзывы</button>
+                </div>
+
+                <div id="my-bookings" class="tab-content active">
+                    <div id="renter-bookings-list">
+                        <p class="empty-state">Загрузка бронирований...</p>
+                    </div>
+                </div>
+
+                <div id="favorites" class="tab-content">
+                    <div id="favorites-list" class="favorites-list">
+                        <p class="empty-state">Откройте вкладку, чтобы загрузить список…</p>
+                    </div>
+                </div>
+
+                <div id="reviews" class="tab-content">
+                    <div id="my-reviews-list">
+                        <p class="empty-state">Загрузка отзывов...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель: Арендодатель -->
+            <div id="landlord-panel" class="role-panel" style="display:none;">
+
+                <!-- Блок верификации -->
+                <div class="verification-card">
+                    <h3 class="verification-title">Верификация арендодателя</h3>
+                    <div id="verification-block">
+                        <p class="empty-state">Загрузка...</p>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab(event, 'venues')">Мои площадки</button>
+                    <button class="tab" onclick="switchTab(event, 'bookings-manage')">Бронирования</button>
+                </div>
+
+                <div id="venues" class="tab-content active">
+                    <button id="add-venue-top-btn" class="btn-primary btn-add-venue" onclick="toggleAddVenueForm()">Добавить площадку</button>
+
+                    <!-- Форма добавления/редактирования площадки -->
+                    <div id="add-venue-form" class="add-venue-form-wrapper">
+                        <h3 class="add-venue-form-title" id="venue-form-title">Новая площадка</h3>
+                        <form id="venue-form" novalidate>
+                            <div class="form-group">
+                                <label>Название площадки <span class="required-star">*</span></label>
+                                <input type="text" name="name" maxlength="100" placeholder='Например: Спортивный комплекс "Олимп"'>
+                                <span class="venue-field-error" id="err-name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Город <span class="required-star">*</span></label>
+                                <select name="city" class="sidebar-select" style="width:100%;padding:10px 12px;border:1px solid #e0e0e0;font-size:15px;">
+                                    <option value="">— Выберите город —</option>
+                                    <option value="Киров">Киров</option>
+                                    <option value="Москва">Москва</option>
+                                    <option value="Санкт-Петербург">Санкт-Петербург</option>
+                                    <option value="Самара">Самара</option>
+                                </select>
+                                <span class="venue-field-error" id="err-city"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Адрес <span class="required-star">*</span></label>
+                                <input type="text" name="address" placeholder="Например: Московская улица, 15">
+                                <span class="venue-field-error" id="err-address"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Виды спорта <span class="required-star">*</span></label>
+                                <input type="hidden" name="sport_types" id="sport-types-value">
+                                <div class="amenities-grid">
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Футбол"> Футбол</label>
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Баскетбол"> Баскетбол</label>
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Волейбол"> Волейбол</label>
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Теннис"> Теннис</label>
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Хоккей"> Хоккей</label>
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Плавание"> Плавание</label>
+                                    <label class="amenity-check"><input type="checkbox" name="sport_type_cb" value="Бокс"> Бокс</label>
+                                </div>
+                                <span class="venue-field-error" id="err-sport_types"></span>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Вместимость (человек) <span class="required-star">*</span></label>
+                                    <input type="number" name="capacity" min="1" max="5000" step="1" placeholder="10">
+                                    <span class="venue-field-error" id="err-capacity"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Площадь (м²)</label>
+                                    <input type="number" name="area" step="0.01" min="10" max="100000" placeholder="300">
+                                    <span class="venue-field-error" id="err-area"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Цена за час (₽) <span class="required-star">*</span></label>
+                                <input type="number" name="price_per_hour" min="1" max="10000000" step="1" placeholder="1000">
+                                <span class="venue-field-error" id="err-price_per_hour"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Описание</label>
+                                <textarea name="description" rows="4" placeholder="Описание площадки, особенности..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Удобства</label>
+                                <div class="amenities-grid">
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Парковка"> Парковка</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Wi-Fi"> Wi-Fi</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Инвентарь"> Инвентарь</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Душевые"> Душевые</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Раздевалки"> Раздевалки</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Туалет"> Туалет</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Трибуны"> Трибуны</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Кафе"> Кафе</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Освещение"> Освещение</label>
+                                    <label class="amenity-check"><input type="checkbox" name="amenity" value="Крытое помещение"> Крытое помещение</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Фотография площадки <span class="required-star">*</span></label>
+                                <div class="image-upload-area" id="image-upload-area" onclick="document.getElementById('venue-image-file').click()">
+                                    <div class="image-upload-placeholder" id="image-upload-placeholder">
+                                        <div class="image-upload-icon">&#128444;</div>
+                                        <div>Нажмите для выбора файла</div>
+                                        <small>JPG, PNG, WebP до 5 МБ</small>
+                                    </div>
+                                    <img id="image-preview" class="image-preview" src="" alt="Превью" style="display:none;">
+                                    <button type="button" class="upload-clear-btn" id="image-clear-btn" style="display:none"
+                                        title="Удалить фото"
+                                        onclick="clearUploadField('image-preview','image-upload-placeholder','venue-image-file','image-path-value','image-upload-status','image-clear-btn'); event.stopPropagation();">&times;</button>
+                                </div>
+                                <input type="file" id="venue-image-file" accept="image/jpeg,image/png,image/webp,image/gif" style="display:none;">
+                                <input type="hidden" name="image_path" id="image-path-value">
+                                <div id="image-upload-status" class="form-hint"></div>
+                            </div>
+                            <div class="form-group" id="extra-images-group" style="display:none">
+                                <label>Дополнительные фотографии</label>
+                                <div id="extra-images-list" class="extra-images-list"></div>
+                                <label class="extra-images-add-btn" for="extra-images-input">+ Добавить фото</label>
+                                <input type="file" id="extra-images-input" accept="image/jpeg,image/png,image/webp" multiple style="display:none">
+                                <small class="extra-images-hint">JPG, PNG, WebP до 5 МБ · не более 10 фотографий</small>
+                                <div id="extra-images-status" class="form-hint"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>QR-код для оплаты <span class="required-star">*</span></label>
+                                <div class="image-upload-area qr-upload-area" id="qr-upload-area" onclick="document.getElementById('venue-qr-file').click()">
+                                    <div class="image-upload-placeholder" id="qr-upload-placeholder">
+                                        <div class="image-upload-icon">&#9646;&#9646;&#9646;</div>
+                                        <div>Нажмите для выбора QR-кода</div>
+                                        <small>JPG, PNG до 5 МБ</small>
+                                    </div>
+                                    <img id="qr-preview" class="image-preview qr-preview" src="" alt="QR-код" style="display:none;">
+                                    <button type="button" class="upload-clear-btn" id="qr-clear-btn" style="display:none"
+                                        title="Удалить QR-код"
+                                        onclick="clearUploadField('qr-preview','qr-upload-placeholder','venue-qr-file','qr-path-value','qr-upload-status','qr-clear-btn'); event.stopPropagation();">&times;</button>
+                                </div>
+                                <input type="file" id="venue-qr-file" accept="image/jpeg,image/png,image/webp" style="display:none;">
+                                <input type="hidden" name="qr_code_path" id="qr-path-value">
+                                <div id="qr-upload-status" class="form-hint"></div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary" id="venue-form-submit">Создать площадку</button>
+                                <button type="button" class="btn-secondary" onclick="closeVenueForm()">Отмена</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Список площадок арендодателя (загружается динамически) -->
+                    <div id="landlord-venues-list"></div>
+                </div>
+
+                <div id="bookings-manage" class="tab-content">
+                    <div id="landlord-bookings-list">
+                        <p class="empty-state">Загрузка бронирований...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель: Администратор -->
+            <div id="admin-panel" class="role-panel" style="display:none;">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab(event, 'disputes')">Споры</button>
+                    <button class="tab" onclick="switchTab(event, 'verifications')">Верификация</button>
+                    <button class="tab" onclick="switchTab(event, 'admin-reviews')">Отзывы</button>
+                </div>
+
+                <div id="disputes" class="tab-content active">
+                    <div class="disputes-filter-bar">
+                        <button class="dispute-filter-btn active" data-filter="">Все</button>
+                        <button class="dispute-filter-btn" data-filter="open">Открытые</button>
+                        <button class="dispute-filter-btn" data-filter="resolved_renter">Решено в пользу арендатора</button>
+                        <button class="dispute-filter-btn" data-filter="resolved_landlord">Решено в пользу арендодателя</button>
+                    </div>
+                    <div id="admin-disputes-list">
+                        <p class="empty-state">Загрузка...</p>
+                    </div>
+                </div>
+
+                <div id="verifications" class="tab-content">
+                    <div id="verifications-list">
+                        <p class="empty-state">Загрузка заявок...</p>
+                    </div>
+                </div>
+
+                <div id="admin-reviews" class="tab-content">
+                    <div id="admin-reviews-list">
+                        <p class="empty-state">Загрузка отзывов...</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SportBook</h3>
+                    <p>Современная платформа для бронирования спортивных площадок</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="/">Главная</a>
+                    <a href="/catalog">Площадки</a>
+                    <a href="/about">О нас</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SportBook. Выпускная квалификационная работа</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно просмотра чека -->
+    <div id="receipt-modal" class="receipt-modal-overlay" style="display:none;" onclick="closeReceiptModal(event)">
+        <div class="receipt-modal">
+            <div class="receipt-modal-header">
+                <h3>Чек об оплате</h3>
+                <button class="booking-modal-close-btn" onclick="closeReceiptModal()">&times;</button>
+            </div>
+            <div class="receipt-modal-body">
+                <img id="receipt-modal-img" src="" alt="Чек" class="receipt-modal-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно просмотра документов верификации -->
+    <div id="verify-doc-modal" class="receipt-modal-overlay" style="display:none;" onclick="closeVerificationDocModal(event)">
+        <div class="receipt-modal verify-doc-modal-inner">
+            <div class="receipt-modal-header">
+                <h3>Документ верификации</h3>
+                <button type="button" class="booking-modal-close-btn" onclick="closeVerificationDocModal()">&times;</button>
+            </div>
+            <div class="receipt-modal-body verify-doc-modal-body">
+                <img id="verify-doc-modal-img" src="" alt="Документ" class="receipt-modal-img" style="display:none;">
+                <iframe id="verify-doc-modal-iframe" title="Документ PDF" class="verify-doc-modal-iframe" style="display:none;"></iframe>
+            </div>
+            <div class="verify-doc-modal-footer">
+                <a id="verify-doc-modal-tab-link" href="#" target="_blank" rel="noopener" class="btn-secondary">Открыть в новой вкладке</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/api.js?v=18"></script>
+    <script src="/static/js/favorites.js?v=2"></script>
+    <script src="/static/js/cabinet.js?v=46"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог площадок - SportBook</title>
+    <link rel="stylesheet" href="/static/css/styles.css?v=2">
+    <link rel="stylesheet" href="/static/css/catalog.css?v=10">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="/">SportBook</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="/" class="nav-link">Главная</a>
+                    <a href="/catalog" class="nav-link active">Площадки</a>
+                    <a href="/about" class="nav-link">О нас</a>
+                    <a href="/login" class="btn-login" id="nav-auth-btn">Войти</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="container">
+
+            <h2 class="section-title">Каталог спортивных площадок</h2>
+
+            <div class="catalog-search-bar">
+                <input
+                    type="text"
+                    id="name-search"
+                    class="catalog-search-input"
+                    placeholder="Поиск по названию площадки..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <!-- Двухколоночный layout: сайдбар + карточки -->
+            <div class="catalog-layout">
+
+                <!-- Боковая панель фильтров -->
+                <aside class="catalog-sidebar">
+                    <div class="sidebar-section">
+                        <h4 class="sidebar-section-title">Город</h4>
+                        <select class="sidebar-select" id="city-filter">
+                            <option value="">Все города</option>
+                            <option value="Киров">Киров</option>
+                            <option value="Москва">Москва</option>
+                            <option value="Санкт-Петербург">Санкт-Петербург</option>
+                            <option value="Самара">Самара</option>
+                        </select>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4 class="sidebar-section-title">Вид спорта</h4>
+                        <select class="sidebar-select" id="sport-filter">
+                            <option value="">Все виды спорта</option>
+                            <option value="Футбол">Футбол</option>
+                            <option value="Баскетбол">Баскетбол</option>
+                            <option value="Волейбол">Волейбол</option>
+                            <option value="Теннис">Теннис</option>
+                            <option value="Хоккей">Хоккей</option>
+                            <option value="Плавание">Плавание</option>
+                            <option value="Бокс">Бокс</option>
+                        </select>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4 class="sidebar-section-title">Удобства</h4>
+                        <div class="amenity-filters">
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Парковка"> Парковка
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Wi-Fi"> Wi-Fi
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Инвентарь"> Инвентарь
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Душевые"> Душевые
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Раздевалки"> Раздевалки
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Туалет"> Туалет
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Трибуны"> Трибуны
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Кафе"> Кафе
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Освещение"> Освещение
+                            </label>
+                            <label class="amenity-filter-check">
+                                <input type="checkbox" name="filter-amenity" value="Крытое помещение"> Крытое помещение
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4 class="sidebar-section-title">Вместимость</h4>
+                        <select class="sidebar-select" id="capacity-filter">
+                            <option value="">Любая</option>
+                            <option value="small">До 10 человек</option>
+                            <option value="medium">10–20 человек</option>
+                            <option value="large">Более 20 человек</option>
+                        </select>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4 class="sidebar-section-title">Цена за час (₽)</h4>
+                        <div class="price-range">
+                            <input type="number" id="price-min" class="price-input" placeholder="От" min="0">
+                            <span class="price-sep">—</span>
+                            <input type="number" id="price-max" class="price-input" placeholder="До" min="0">
+                        </div>
+                    </div>
+
+                    <button class="sidebar-reset-btn" id="reset-filters">Сбросить фильтры</button>
+                </aside>
+
+                <!-- Зона карточек -->
+                <div class="catalog-content">
+                    <div class="catalog-results-info" id="results-info"></div>
+                    <div class="venues-grid" id="venues-grid"></div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SportBook</h3>
+                    <p>Современная платформа для бронирования спортивных площадок</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="/">Главная</a>
+                    <a href="/catalog">Площадки</a>
+                    <a href="/about">О нас</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SportBook. Выпускная квалификационная работа</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/api.js?v=18"></script>
+    <script src="/static/js/favorites.js?v=2"></script>
+    <script src="/static/js/catalog.js?v=12"></script>
+</body>
+</html>
