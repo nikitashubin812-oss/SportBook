@@ -1,7 +1,0 @@
-Тестовые аккаунты:
-
-Арендатор: renter1@example.com / renter123
-
-Арендодатель: landlord1@example.com / landlord123
-
-Администратор: admin@sportbook.ru / admin123
